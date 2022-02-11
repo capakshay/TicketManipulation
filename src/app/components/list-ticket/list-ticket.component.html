@@ -1,0 +1,50 @@
+<h3>Tickets</h3>
+<table  class="table table-bordered table-striped" datatable [dtOptions]="dtOptions" >
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of ticketData">
+                <td><span>{{ticket.ticket_id}}</span></td>
+                <td><span>{{ticket.description}}</span></td>
+                <td><span>{{ticket.priority}}</span></td>
+                <td><span>{{ticket.tdate | mypipe : 0}}</span></td>
+                <td>
+                  <button class="btn btn-sm btn-danger myicon" (click)="openEdit(contentDelete)" >
+                    <i class="fa fa-trash"></i>Delete
+                  </button>
+                    
+                <ng-template #contentDelete let-modal>
+                  <div class="modal-header ">
+                    <h1 class="modal-title" > Confirm Delete</h1>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h3>Are you Sure You want to delete this record?</h3>
+                    <div class="text-center">
+                      <button data-dismiss="modal" class="btn btn-sm btn-danger" (click)="deleteTicket(ticket.ticket_id)" >
+                        Yes,Delete
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+                  <!-- <button class="btn btn-sm btn-danger" (click)="deleteTicket(ticket.ticket_id)" >
+                    <i class="fa fa-trash"></i>Delete
+                  </button> -->
+                  &nbsp;
+                  <a routerLink="/edit/{{ticket.ticket_id}}">
+                      <button class="btn btn-sm btn-warning">
+                      <i class="fa fa-edit"></i>Update
+                    </button>
+                    </a>                  
+                </td>
+          </tbody>
+  </table>
